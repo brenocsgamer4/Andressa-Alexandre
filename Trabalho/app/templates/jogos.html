@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Jogos - SIGTO{% endblock %}
+
+{% block content %}
+    <h2>Jogos</h2>
+
+    {% if current_user.is_authenticated and current_user.role == 'Admin' %}
+
+        <a href="{{ url_for('main.novo_jogo') }}">Cadastrar Novo Jogo</a>
+        <hr>
+        
+        <ul>
+            {% for jogo in jogos %}
+                <li>
+                    <strong>{{ jogo.campeonato.nome }}</strong> - {{ jogo.data_hora.strftime('%d/%m/%Y %H:%M') }}
+                    <br>
+                    {{ jogo.time_casa.nome }} {{ jogo.placar_casa }} 
+                    x 
+                    {{ jogo.placar_visitante }} {{ jogo.time_visitante.nome }}
+                    <br>
+                    <em>Status: {{ jogo.status }}</em>
+                    <br>
+                    <a href="{{ url_for('main.editar_jogo', id=jogo.id) }}">Editar</a>
+                    <form action="{{ url_for('main.deletar_jogo', id=jogo.id) }}" method="POST" style="display: inline;">
+                        <input type="submit" value="Remover" onclick="return confirm('Tem certeza que deseja remover este jogo?')">
+                    </form>
+                </li>
+                <br>
+            {% else %}
+                <li>Nenhum jogo cadastrado ainda.</li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <div class="jogo-lista">
+            {% for jogo in jogos %}
+                <div class="jogo-card">
+                    <div class="jogo-campeonato">{{ jogo.campeonato.nome }}</div>
+                    
+                    <div class="jogo-times">
+                        <span class="time-nome">{{ jogo.time_casa.nome }}</span>
+                        <span class="placar">
+                            {{ jogo.placar_casa }} x {{ jogo.placar_visitante }}
+                        </span>
+                        <span class="time-nome">{{ jogo.time_visitante.nome }}</span>
+                    </div>
+                    
+                    <div class="jogo-detalhes">
+                        <span class="data">{{ jogo.data_hora.strftime('%d/%m/%Y %H:%M') }}</span>
+                        <span class="status status-{{ jogo.status | lower | replace(' ', '-') }}">
+                            {{ jogo.status }}
+                        </span>
+                    </div>
+                </div>
+            {% else %}
+                <p>Nenhum jogo para exibir.</p>
+            {% endfor %}
+        </div>
+
+    {% endif %} {% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SIGTO{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+
+<body class="{% if current_user.is_authenticated and current_user.role == 'Admin' %}admin-view{% else %}public-view{% endif %}">
+
+    <header>
+        <h1><a href="{{ url_for('main.home') }}">SIGTO - Sistema de Gerenciamento</a></h1>
+        
+        <nav>
+            <a href="{{ url_for('main.campeonatos') }}">Campeonatos</a> |
+            <a href="{{ url_for('main.jogos') }}">Jogos</a>
+
+            {% if current_user.is_authenticated %}
+                {% if current_user.role == 'Admin' %}
+                    | <a href="{{ url_for('main.times') }}">Times</a> 
+                    | <a href="{{ url_for('main.gerenciar_usuarios') }}">Gerenciar Usuários</a>
+                {% endif %}
+                
+                | <span>({{ current_user.nome }} / <a href="{{ url_for('main.logout') }}">Logout</a>)</span>
+            
+            {% endif %} 
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>

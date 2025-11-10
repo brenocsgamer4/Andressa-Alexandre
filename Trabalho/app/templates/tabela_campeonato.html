@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Tabela: {{ campeonato.nome }}{% endblock %}
+
+{% block content %}
+    <h2>Tabela de Classificação: {{ campeonato.nome }}</h2>
+    
+    <table border="1" cellpadding="5" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>Pos.</th>
+                <th>Time</th>
+                <th>P</th> <th>J</th> <th>V</th> <th>E</th> <th>D</th> <th>GP</th> <th>GC</th> <th>SG</th> </tr>
+        </thead>
+        <tbody>
+            {% for time in tabela %}
+                <tr>
+                    <td>{{ loop.index }}º</td>
+                    <td>{{ time.nome }}</td>
+                    <td><strong>{{ time.pontos }}</strong></td>
+                    <td>{{ time.jogos_disputados }}</td>
+                    <td>{{ time.vitorias }}</td>
+                    <td>{{ time.empates }}</td>
+                    <td>{{ time.derrotas }}</td>
+                    <td>{{ time.gols_pro }}</td>
+                    <td>{{ time.gols_contra }}</td>
+                    <td>{{ time.saldo_gols }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">Nenhum jogo finalizado neste campeonato para exibir.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p><a href="{{ url_for('main.campeonatos') }}" class="btn-voltar">Voltar para a lista de campeonatos</a></p>
+{% endblock %}

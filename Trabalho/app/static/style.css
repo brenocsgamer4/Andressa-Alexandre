@@ -1,0 +1,249 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.flashes {
+    list-style: none;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.flashes .success { color: green; border: 1px solid green; }
+.flashes .danger { color: red; border: 1px solid red; }
+.flashes .warning { color: orange; border: 1px solid orange; }
+
+.admin-view header {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.admin-view header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.admin-view header h1 a {
+    text-decoration: none;
+    color: #333;
+}
+.admin-view nav {
+    margin-top: 10px;
+}
+.admin-view nav a {
+    color: #007BFF;
+    text-decoration: none;
+    padding: 0 5px;
+}
+.admin-view nav a:hover {
+    text-decoration: underline;
+}
+.admin-view nav span {
+    color: #555;
+    padding: 0 5px;
+}
+
+.public-view {
+    background-color: #fafafa;
+}
+.public-view header {
+    background: linear-gradient(to right, #4a00e0, #8e2de2);
+    padding: 15px;
+    border-bottom: none;
+}
+.public-view header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+.public-view header h1 a,
+.public-view nav a,
+.public-view nav span {
+    color: #ffffff; 
+    text-decoration: none;
+}
+.public-view nav {
+    margin-top: 10px;
+}
+.public-view nav a {
+    padding: 0 5px;
+}
+.public-view nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    text-decoration: none;
+}
+.public-view h2 {
+    color: #333;
+    border-bottom: 2px solid #8e2de2;
+    padding-bottom: 5px;
+}
+.public-view table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.public-view th {
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+.public-view td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.public-view .campeonato-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.public-view .campeonato-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #ffffff;
+}
+.public-view .campeonato-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.public-view .campeonato-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.public-view .campeonato-card h3 a {
+    text-decoration: none;
+    color: #4a00e0;
+    font-size: 1.25em;
+}
+.public-view .campeonato-card h3 a:hover {
+    text-decoration: underline;
+}
+.public-view .campeonato-datas {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* BOTÃO "VOLTAR" (APENAS PARA PÚBLICO) */
+.public-view .btn-voltar {
+    display: inline-block;
+    background-color: #8e2de2;
+    color: #ffffff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+.public-view .btn-voltar:hover {
+    background-color: #4a00e0;
+    color: #ffffff;
+}
+
+.public-view .jogo-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+.public-view .jogo-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Informação do Campeonato (no topo do card) */
+.public-view .jogo-campeonato {
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* Secção Times vs Placar */
+.public-view .jogo-times {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.public-view .jogo-times .time-nome {
+    flex: 1; /* Faz os nomes terem espaço */
+    text-align: center;
+}
+.public-view .jogo-times .placar {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #4a00e0; /* Roxo */
+    padding: 0 10px;
+}
+
+/* Detalhes (Data e Status) */
+.public-view .jogo-detalhes {
+    font-size: 0.9em;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Estilos dinâmicos para o Status */
+.public-view .status {
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+.public-view .status-finalizado {
+    color: #28a745; /* Verde */
+    background-color: #eaf6ec;
+}
+.public-view .status-agendado {
+    color: #6c757d; /* Cinza */
+    background-color: #f8f9fa;
+}
+.public-view .status-em-andamento {
+    color: #fd7e14; /* Laranja */
+    background-color: #fff8f0;
+}
+
+@media (max-width: 768px) {
+    .public-view header {
+        text-align: center;
+    }
+    .public-view nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .public-view nav a {
+        padding: 8px;
+        margin: 4px 0;
+        width: 80%;
+        text-align: center;
+    }
+    .public-view nav a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+    }
+    .public-view table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Cadastrar Jogo - SIGTO{% endblock %}
+
+{% block content %}
+    <h2>Cadastrar Novo Jogo</h2>
+    
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div>
+            <p>{{ form.campeonato.label }}<br>{{ form.campeonato() }}</p>
+            <p>{{ form.time_casa.label }}<br>{{ form.time_casa() }}</p>
+            <p>{{ form.time_visitante.label }}<br>{{ form.time_visitante() }}</p>
+            
+            <p>{{ form.data_hora.label }}<br>{{ form.data_hora(type="datetime-local") }}</p>
+            <p>{{ form.placar_casa.label }}<br>{{ form.placar_casa(size=5) }}</p>
+            <p>{{ form.placar_visitante.label }}<br>{{ form.placar_visitante(size=5) }}</p>
+            <p>{{ form.status.label }}<br>{{ form.status() }}</p>
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+
+    <p><a href="{{ url_for('main.jogos') }}">Voltar para a lista de jogos</a></p>
+{% endblock %}

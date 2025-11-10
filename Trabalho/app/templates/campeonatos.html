@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Campeonatos - SIGTO{% endblock %}
+
+{% block content %}
+    <h2>Campeonatos</h2>
+
+    {% if current_user.is_authenticated and current_user.role == 'Admin' %}
+
+        <a href="{{ url_for('main.novo_campeonato') }}">Cadastrar Novo Campeonato</a>
+        <hr>
+        
+        <ul>
+            {% for camp in campeonatos %}
+                <li>
+                    <strong>
+                        <a href="{{ url_for('main.ver_tabela_campeonato', id=camp.id) }}">
+                            {{ camp.nome }}
+                        </a>
+                    </strong> 
+                    
+                    (de {{ camp.data_inicio.strftime('%d/%m/%Y') }} a {{ camp.data_fim.strftime('%d/%m/%Y') }})
+                    
+                    - <a href="{{ url_for('main.editar_campeonato', id=camp.id) }}">Editar</a>
+                    - <form action="{{ url_for('main.deletar_campeonato', id=camp.id) }}" method="POST" style="display: inline;">
+                        <input type="submit" value="Remover" onclick="return confirm('Tem certeza que deseja remover este campeonato?')">
+                      </form>
+                </li>
+            {% else %}
+                <li>Nenhum campeonato cadastrado ainda.</li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <div class="campeonato-lista">
+            {% for camp in campeonatos %}
+                <div class="campeonato-card">
+                    <h3>
+                        <a href="{{ url_for('main.ver_tabela_campeonato', id=camp.id) }}">
+                            {{ camp.nome }}
+                        </a>
+                    </h3>
+                    <p class="campeonato-datas">
+                        (de {{ camp.data_inicio.strftime('%d/%m/%Y') }} a {{ camp.data_fim.strftime('%d/%m/%Y') }})
+                    </p>
+                </div>
+            {% else %}
+                <p>Nenhum campeonato cadastrado ainda.</p>
+            {% endfor %}
+        </div>
+
+    {% endif %} {% endblock %}

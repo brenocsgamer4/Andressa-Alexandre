@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Gerenciar Utilizadores - SIGTO{% endblock %}
+
+{% block content %}
+    <h2>Gerenciar Utilizadores</h2>
+    
+    <p><a href="{{ url_for('main.novo_usuario_admin') }}">Adicionar Novo Utilizador</a></p>
+    <hr>
+    
+    <table border="1" cellpadding="5" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Função (Role)</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.role }}</td>
+                    <td>
+                        {% if usuario.id == 1 %}
+                            <strong>(Admin Supremo)</strong>
+                        {% else %}
+                            <form action="{{ url_for('main.deletar_usuario', id=usuario.id) }}" method="POST" style="display: inline;">
+                                <input type="submit" value="Remover" onclick="return confirm('Tem certeza que deseja remover este utilizador?')">
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Nenhum utilizador encontrado.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

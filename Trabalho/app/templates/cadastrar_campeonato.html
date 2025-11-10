@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Cadastrar Campeonato - SIGTO{% endblock %}
+
+{% block content %}
+    <h2>Cadastrar Novo Campeonato</h2>
+    
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div>
+            <p>{{ form.nome.label }}<br>{{ form.nome(size=40) }}</p>
+            <p>{{ form.data_inicio.label }}<br>{{ form.data_inicio(type="date") }}</p>
+            <p>{{ form.data_fim.label }}<br>{{ form.data_fim(type="date") }}</p>
+            <p>{{ form.regras.label }}<br>{{ form.regras(rows=5, cols=40) }}</p>
+        </div>
+        <div>
+            {{ form.submit_campeonato() }}
+        </div>
+    </form>
+
+    <p><a href="{{ url_for('main.campeonatos') }}">Voltar para a lista</a></p>
+{% endblock %}

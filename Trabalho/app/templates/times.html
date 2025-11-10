@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Times - SIGTO{% endblock %}
+
+{% block content %}
+    <h2>Times Cadastrados</h2>
+    
+    {% if current_user.is_authenticated and current_user.role == 'Admin' %}
+        <a href="{{ url_for('main.novo_time') }}">Cadastrar Novo Time</a>
+        <hr>
+    {% endif %}
+    
+    <ul>
+        {% for time in times %}
+            <li>
+                {{ time.nome }}
+                
+                {% if current_user.is_authenticated and current_user.role == 'Admin' %}
+                    -
+                    <a href="{{ url_for('main.editar_time', id=time.id) }}">Editar</a>
+                    -
+                    <form action="{{ url_for('main.deletar_time', id=time.id) }}" method="POST" style="display: inline;">
+                        <input type="submit" value="Remover" onclick="return confirm('Tem certeza que deseja remover este time?')">
+                    </form>
+                {% endif %}
+            </li>
+        {% else %}
+            <li>Nenhum time cadastrado ainda.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

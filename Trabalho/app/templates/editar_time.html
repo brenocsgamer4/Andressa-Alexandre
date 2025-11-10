@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Editar Time - SIGTO{% endblock %}
+
+{% block content %}
+    <h2>Editar Time: {{ time.nome }}</h2>
+    
+    <form method="POST" action="">
+        {{ form.hidden_tag() }} 
+        <div>
+            {{ form.nome.label }}
+            {{ form.nome() }}
+            {% if form.nome.errors %}
+                {% for error in form.nome.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <br>
+        <div>
+            {{ form.submit(value='Atualizar Time') }}
+        </div>
+    </form>
+    
+    <p><a href="{{ url_for('main.times') }}">Voltar para a lista de times</a></p>
+{% endblock %}
